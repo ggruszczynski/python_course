@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#from builtins import list
+# from builtins import list
 
 
 def test(fun, *args):
@@ -12,29 +12,30 @@ def test(fun, *args):
     :return: 
     """
     print "".join(['-' for i in range(40)])
-    print fun.__name__[:-1].upper()+" "+fun.__name__[-1]
+    print fun.__name__[:-1].upper() + " " + fun.__name__[-1]
     res = fun(*args[:-1])
     if isinstance(args[0], str):
         decoded = "".join([chr(i) for i in args[-1]])
         if res == decoded:
-            print "Yes, "+decoded.replace("my","your")
+            print "Yes, " + decoded.replace("my", "your")
         else:
-            print "No, "+decoded.replace("my","your").replace("has","has not")+" yet"
+            print "No, " + decoded.replace("my", "your").replace("has", "has not") + " yet"
     else:
-        print "Is correct? "+ str(res == args[-1])
+        print "Is correct? " + str(res == args[-1])
     print "".join(['-' for i in range(40)])
 
 
 print("Hello!")
+
 
 def zadanie1(listObject):
     #  Zadaniem tej funkcji jest przetworzenie przekazanej listy (przekazana jako listObject)
     #  tak oby usunąć powtarzające się elementy ale tylko pomiędzy sąsiadami.
     for obj in listObject[:-1]:
         n = listObject.index(obj)
-        if obj == listObject[n+1] :
-            del listObject[n+1]
-        #print(listObject)
+        if obj == listObject[n + 1]:
+            del listObject[n + 1]
+            # print(listObject)
     return listObject
 
 
@@ -52,10 +53,55 @@ def zadanie2(list1, list2):
     Uwaga, listy mogą nie być tej samej długości.
     """
     mixedList = list()
+    shorterLength = min(len(list1), len(list2))
 
+    if len(list1) > len(list2):
+        longerList = list1
+    else:
+        longerList = list2
+
+    for l, r in zip(list1[:shorterLength], list2[:shorterLength]):
+        mixedList.append(l)
+        mixedList.append(r)
+
+    for obj in longerList[shorterLength:]:
+        mixedList.append(obj)
 
     return mixedList
 
-#test(zadanie2, [1, 2, 19, 'dd', ':P', ":("], [12,'c','5'], [1, 12, 2, 'c', 19, '5', 'dd', ':P', ':('])
 
+output = zadanie2([1, 2, 19, 'dd', ':P', ":("], [12, 'c', '5'])
+
+test(zadanie2, [1, 2, 19, 'dd', ':P', ":("], [12, 'c', '5'], [1, 12, 2, 'c', 19, '5', 'dd', ':P', ':('])
+
+
+def zadanie3(listTuples):
+    """
+    Funkcja powinna zwracać posortowaną listę elementów typu tuple. 
+    Sortowanie wykonaj biorąc pod uwagę ostatni element każdego tuple.
+    :param listTuples: 
+    :return: 
+    """
+    sorted_list = list(listTuples)
+    isSwapped = True
+
+    while isSwapped:
+        isSwapped = False
+        for k in range(len(sorted_list)-1):
+            if sorted_list[k] > sorted_list[k + 1]:
+                sorted_list[k], sorted_list[k + 1] = sorted_list[k + 1], sorted_list[k]
+                isSwapped=True
+
+    return sorted_list
+
+
+posortowane = zadanie3([6,3,1,4,7,2])
+
+test(zadanie3, [(1, 3), (3, 3, 2), (2, 1)], [(2, 1), (3, 3, 2), (1, 3)])
+
+
+
+
+
+# Q:
 # wektor vs lista?
