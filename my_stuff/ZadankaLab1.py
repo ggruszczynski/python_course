@@ -75,30 +75,88 @@ output = zadanie2([1, 2, 19, 'dd', ':P', ":("], [12, 'c', '5'])
 test(zadanie2, [1, 2, 19, 'dd', ':P', ":("], [12, 'c', '5'], [1, 12, 2, 'c', 19, '5', 'dd', ':P', ':('])
 
 
-def zadanie3(listTuples):
+# def zadanie3(listTuples):
+#     """
+#     Funkcja powinna zwracać posortowaną (listę) elementów typu [tuple].
+#     Sortowanie wykonaj biorąc pod uwagę ostatni element każdego tuple.
+#     :param listTuples:
+#     :return:
+#     """
+#     sorted_list = list(listTuples)
+#     isSwapped = True
+#
+#     while isSwapped: # bubble sort
+#         isSwapped = False
+#         for k in range(len(sorted_list)-1):
+#             if sorted_list[k] > sorted_list[k + 1]:
+#                 sorted_list[k], sorted_list[k + 1] = sorted_list[k + 1], sorted_list[k]
+#                 isSwapped=True
+#
+#     return sorted_list
+#
+#
+# posortowane = zadanie3([6,3,1,4,7,2])
+
+
+
+def zadanie3(listOfTuples):
     """
-    Funkcja powinna zwracać posortowaną listę elementów typu tuple. 
+    Funkcja powinna zwracać posortowaną [listę] elementów typu (tuple). 
     Sortowanie wykonaj biorąc pod uwagę ostatni element każdego tuple.
-    :param listTuples: 
+    :param listOfTuples: 
     :return: 
     """
-    sorted_list = list(listTuples)
-    isSwapped = True
 
-    while isSwapped:
+    sorted_list = list(listOfTuples) #Q - is it the same: sorted_list = copy.deepcopy(listOfTuples) # make a deep copy
+    isSwapped = True
+    while isSwapped: # bubble sort
         isSwapped = False
         for k in range(len(sorted_list)-1):
-            if sorted_list[k] > sorted_list[k + 1]:
+            if sorted_list[k][-1] > sorted_list[k + 1][-1]:
                 sorted_list[k], sorted_list[k + 1] = sorted_list[k + 1], sorted_list[k]
                 isSwapped=True
 
     return sorted_list
 
-
-posortowane = zadanie3([6,3,1,4,7,2])
+#
+# testListOfTuples = [(1, 3), (3, 3, 2), (2, 1)]
+# posortowane3 = zadanie3a([(1, 3), (3, 3, 2), (2, 1)])
 
 test(zadanie3, [(1, 3), (3, 3, 2), (2, 1)], [(2, 1), (3, 3, 2), (1, 3)])
 
+
+
+def zadanie4(text):
+    """
+    Zadaniem funkcji “zadanie4” jest odczytanie ukrytego zdania w poniższym tekście:
+    “okmyaiaetiaigaafbaf??aaiaetiaigaafbaf??aokwatchoafbusdoafbusdokhasasbrsi31480asbrsi31480okended$aq340af”
+    Napis ten został zakodowany w następujący sposób: 
+    1. do początku każdego wyrazu dodano “ok”, np: “To jest dom” -> “okTo okjest okdom” 
+    2. za każdym oryginalnym wyrazem wstawiono dodatkowy losowy wyraz do zdania, 
+        np: “okTo okjest okdom” -> “okTo asifha okjest ??A?Sd okdom :asrof” 
+    3. na koniec spacje zastąpione zostały znakiem “"
+        np.:"okToasifhaokjest??A?Sdokdom : asrof" -> "okToasifhaokjest??A?Sd??A?Sdokdom$:asrof"
+
+    To zadanie można rozwiązać za pomocą metod klasy string replace, join, startswith i split.
+    :param text: 
+    :return: 
+    """
+    # type your code
+
+    encryptedMSG = str(text)
+    #words = encryptedMSG.split('ok')
+    words = encryptedMSG.split('$')
+
+    decryptedMsgWords = list()
+    for word in words:
+        if word.startswith('ok'):
+            word = word.replace('ok','')
+            decryptedMsgWords.append(word)
+
+    return " ".join(decryptedMsgWords)
+
+
+test(zadanie4, "okmy$aiaetiaigaafbaf??a$okwatch$oafbusd$okhas$asbrsi31480$okended$aq340af", [109, 121, 32, 119, 97, 116, 99, 104, 32, 104, 97, 115, 32, 101, 110, 100, 101, 100])
 
 
 
