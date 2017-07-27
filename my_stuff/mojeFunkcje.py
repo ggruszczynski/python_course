@@ -10,13 +10,15 @@ def first_function():
 first_function()
 
 
-def suma(a, b):
+def mojaSuma(a, b):
     return a + b
 
 
-def roznica(a, b):
+def mojaRoznica(a, b):
     return a - b
 
 
-suma = roznica
+suma = mojaRoznica
 print (suma(5, 2))
+
+
