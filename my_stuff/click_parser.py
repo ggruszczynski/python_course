@@ -8,8 +8,8 @@ GLOBAL_VARABLE = 100
 @click.option('--name', prompt='Your name',
               help='The person to greet.')
 
-@click.option('--do_magic', help='Shall I do magic '                                               
-                                                '(True/False)?.')
+@click.option('--do_magic', is_flag=True,
+              help='Enables magic option')
 def hello(count, name, do_magic):
     """Simple program that greets NAME for a total of COUNT times."""
     if do_magic:
